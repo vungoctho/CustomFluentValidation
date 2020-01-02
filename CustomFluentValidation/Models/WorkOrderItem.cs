@@ -1,5 +1,5 @@
-﻿using ElectrixValidator;
-using ElectrixValidator.Validator;
+﻿
+using Electrix.EAI.FluentValidation;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

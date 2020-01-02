@@ -10,5 +10,7 @@ namespace ElectrixValidator.FileReader
     {
         ValidationRule LoadValidationRules<T>();
 
+        CommonSettings LoadCommonSettings();
+
     }
 }

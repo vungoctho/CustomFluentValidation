@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomFluentValidation", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectrixValidator", "ElectrixValidator\ElectrixValidator.csproj", "{12BC762F-642B-4CA0-94E3-F0346246EBF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Electrix.EAI.FluentValidation", "Electrix.EAI.FluentValidation\Electrix.EAI.FluentValidation.csproj", "{9228EE79-2B89-4D3D-A570-57967C030B95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{12BC762F-642B-4CA0-94E3-F0346246EBF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12BC762F-642B-4CA0-94E3-F0346246EBF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12BC762F-642B-4CA0-94E3-F0346246EBF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9228EE79-2B89-4D3D-A570-57967C030B95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9228EE79-2B89-4D3D-A570-57967C030B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9228EE79-2B89-4D3D-A570-57967C030B95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9228EE79-2B89-4D3D-A570-57967C030B95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

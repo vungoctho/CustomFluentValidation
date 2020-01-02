@@ -6,18 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElectrixValidator.FileReader
+namespace Electrix.EAI.FluentValidation.FileReader
 {
-    
-
     public class JsonRuleReader : IValidationRuleReader
     {
-        public ValidationRule LoadValidationRules<T>()
+        public ValidationRule LoadValidationRules<T>(string containFolder)
         {
-            // Get file validation json by T
-            // Read json and parse to ValidationRules
             var filename = $"{typeof(T).Name}ValidationRules.json";
-            var fullPath = Path.Combine($"{AppDomain.CurrentDomain.BaseDirectory}/Validation/Rules", filename);
+            var fullPath = Path.Combine($"{containFolder}", filename);
+            
             var json = File.ReadAllText(fullPath);
 
             var rules = JsonConvert.DeserializeObject<ValidationRule>(json);
@@ -25,9 +22,9 @@ namespace ElectrixValidator.FileReader
 
         }
 
-        public CommonSettings LoadCommonSettings()
+        public CommonSettings LoadCommonSettings(string containFolder)
         {
-            var fullPath = $"{AppDomain.CurrentDomain.BaseDirectory}/Common/commonSettings.json";
+            var fullPath = Path.Combine($"{containFolder}", "commonSettings.json");
             var json = File.ReadAllText(fullPath);
 
             var settings = JsonConvert.DeserializeObject<CommonSettings>(json);

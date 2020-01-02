@@ -1,14 +1,12 @@
 ﻿using FluentValidation;
-using System;
+using log4net;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ElectrixValidator.Validator
+namespace Electrix.EAI.FluentValidation.Validator
 {
     public class StringValidator : TypeValidatorBase<string>
     {
+        private ILog _logger = LogManager.GetLogger(typeof(StringValidator));
         public StringValidator(List<Rule> rules, List<string> errorMessages)
         {
             foreach (var rule in rules)
@@ -26,11 +24,14 @@ namespace ElectrixValidator.Validator
                         ruleFor = RuleFor(x => x).Must(x => !string.IsNullOrWhiteSpace(x));
                         break;
                     case ValidateOperator.TimePattern:
-                        ruleFor = RuleFor(x => x).Matches(CommonSettings.GetCommonSettings.TimePattern).When(x => !string.IsNullOrWhiteSpace(x));
+                        ruleFor = RuleFor(x => x).Matches(RuleService.GetCommonSettings().TimePattern).When(x => !string.IsNullOrWhiteSpace(x));
+                        break;
+                    default:
+                        _logger.Error($"String validator - Missing define Validate Operator {rule.Name}");
                         break;
                 }
 
-                if(ruleFor != null)
+                if (ruleFor != null)
                 {
                     ruleFor.WithMessage(GetErrorMessage(rule, errorMessages));
                 }

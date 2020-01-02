@@ -9,3 +9,5 @@
 /packages
 /CustomFluentValidation/bin/Debug
 *.user
+/Electrix.EAI.FluentValidation/bin/Debug
+/Electrix.EAI.FluentValidation/obj/Debug
