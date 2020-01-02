@@ -23,5 +23,8 @@ namespace ElectrixValidator
         public ValidateOperator Name { get; set; }
         public string[] Value { get; set; }
         public int ErrorIndex { get; set; }
+        public string[] ErrorFormatParams { get; set; }
+
+        
     }
 }

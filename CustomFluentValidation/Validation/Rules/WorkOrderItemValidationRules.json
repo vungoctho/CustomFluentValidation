@@ -1,7 +1,7 @@
 {
   "ErrorMessages": [
-    "{PropertyName} length cannot be more than {PropertyValue} characters",
-    "{PropertyName} length cannot be less than {PropertyValue} characters"
+    "{0} length cannot be more than {1} characters",
+    "{0} length cannot be less than {1} characters"
   ],
   "ValidationRules": [
     {
@@ -10,12 +10,14 @@
         {
           "Name": "MaximumLength",
           "Value": [ 5 ],
-          "ErrorIndex": 0
+          "ErrorIndex": 0,
+          "ErrorFormatParams": [ "SystemStatus" , 5]
         },
         {
           "Name": "MinimumLength",
           "Value": [ 2 ],
-          "ErrorIndex": 1
+          "ErrorIndex": 1,
+          "ErrorFormatParams": [ "SystemStatus", 2 ]
         }
       ]
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ElectrixValidator.Validator
 {
-    public class StringValidator : AbstractValidator<string>
+    public class StringValidator : TypeValidatorBase<string>
     {
         public StringValidator(List<Rule> rules, List<string> errorMessages)
         {
@@ -16,10 +16,10 @@ namespace ElectrixValidator.Validator
                 switch (rule.Name)
                 {
                     case ValidateOperator.MaximumLength:
-                        RuleFor(x => x).MaximumLength(int.Parse(rule.Value[0])).WithMessage(errorMessages[rule.ErrorIndex]);
+                        RuleFor(x => x).MaximumLength(int.Parse(rule.Value[0])).WithMessage(GetErrorMessage(rule, errorMessages));
                         break;
                     case ValidateOperator.MinimumLength:
-                        RuleFor(x => x).MinimumLength(int.Parse(rule.Value[0])).WithMessage(errorMessages[rule.ErrorIndex]);
+                        RuleFor(x => x).MinimumLength(int.Parse(rule.Value[0])).WithMessage(GetErrorMessage(rule, errorMessages));
                         break;
                 }
             }

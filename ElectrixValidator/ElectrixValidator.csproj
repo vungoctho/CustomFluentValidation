@@ -63,6 +63,7 @@
     <Compile Include="ValidateOperator.cs" />
     <Compile Include="ValidationRule.cs" />
     <Compile Include="Validator\StringValidator.cs" />
+    <Compile Include="Validator\TypeValidatorBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

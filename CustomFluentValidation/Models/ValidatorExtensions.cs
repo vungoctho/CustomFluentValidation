@@ -75,10 +75,7 @@ namespace CustomFluentValidation.Models
         }
 
 
-        public static IRuleBuilderOptions<T, string> MaxLength<T>(this IRuleBuilder<T, string> ruleBuilder, Rule rule, List<string> errorMessages)
-        {
-            return ruleBuilder.MaximumLength(int.Parse(rule.Value[0])).WithMessage(errorMessages[rule.ErrorIndex]);
-        }
+        
 
     }
 }
