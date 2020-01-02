@@ -9,7 +9,9 @@ namespace ElectrixValidator
     public enum ValidateOperator
     {
         MaximumLength,
-        MinimumLength
+        MinimumLength,
+        NotNullOrWhiteSpace,
+        TimePattern
     }
 
 }

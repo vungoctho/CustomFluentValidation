@@ -13,14 +13,26 @@ namespace ElectrixValidator.Validator
         {
             foreach (var rule in rules)
             {
+                IRuleBuilderOptions<string, string> ruleFor = null;
                 switch (rule.Name)
                 {
                     case ValidateOperator.MaximumLength:
-                        RuleFor(x => x).MaximumLength(int.Parse(rule.Value[0])).WithMessage(GetErrorMessage(rule, errorMessages));
+                        ruleFor = RuleFor(x => x).MaximumLength(int.Parse(rule.Value[0]));
                         break;
                     case ValidateOperator.MinimumLength:
-                        RuleFor(x => x).MinimumLength(int.Parse(rule.Value[0])).WithMessage(GetErrorMessage(rule, errorMessages));
+                        ruleFor = RuleFor(x => x).MinimumLength(int.Parse(rule.Value[0]));
                         break;
+                    case ValidateOperator.NotNullOrWhiteSpace:
+                        ruleFor = RuleFor(x => x).Must(x => !string.IsNullOrWhiteSpace(x));
+                        break;
+                    case ValidateOperator.TimePattern:
+                        ruleFor = RuleFor(x => x).Matches(rule.Value[0]).When(x => !string.IsNullOrWhiteSpace(x));
+                        break;
+                }
+
+                if(ruleFor != null)
+                {
+                    ruleFor.WithMessage(GetErrorMessage(rule, errorMessages));
                 }
             }
         }

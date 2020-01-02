@@ -1,7 +1,9 @@
 {
   "ErrorMessages": [
     "{0} length cannot be more than {1} characters",
-    "{0} length cannot be less than {1} characters"
+    "{0} length cannot be less than {1} characters",
+    "{0} must be provided",
+    "{0} should be in hh:mm:ss format"
   ],
   "ValidationRules": [
     {
@@ -11,13 +13,29 @@
           "Name": "MaximumLength",
           "Value": [ 5 ],
           "ErrorIndex": 0,
-          "ErrorFormatParams": [ "SystemStatus" , 5]
+          "ErrorFormatParams": [ "SystemStatus", 5 ]
         },
         {
           "Name": "MinimumLength",
           "Value": [ 2 ],
           "ErrorIndex": 1,
           "ErrorFormatParams": [ "SystemStatus", 2 ]
+        },
+        {
+          "Name": "NotNullOrWhiteSpace",
+          "ErrorIndex": 2,
+          "ErrorFormatParams": [ "SystemStatus" ]
+        }
+      ]
+    },
+    {
+      "PropertyName": "ScheduledStartTime",
+      "Rules": [
+        {
+          "Name": "TimePattern",
+          "Value": [ "^(?:(?:([01]?\\d|2[0-3])\\:)?([0-5]?\\d)\\:)?([0-5]?\\d)$" ],
+          "ErrorIndex": 3,
+          "ErrorFormatParams": [ "Scheduled Start Time"]
         }
       ]
     }

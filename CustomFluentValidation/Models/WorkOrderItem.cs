@@ -13,6 +13,7 @@ namespace CustomFluentValidation.Models
     public class WorkOrderItem 
     {
         public string SystemStatus { get; set; }
+        public string ScheduledStartTime { get; set; }
         public double? ActivityValue { get; set; }
         
     }
