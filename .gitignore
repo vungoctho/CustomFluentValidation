@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/CustomFluentValidation/v16
+/CustomFluentValidation/obj/Debug
+/ElectrixValidator/bin/Debug
+/ElectrixValidator/obj/Debug
+/packages
