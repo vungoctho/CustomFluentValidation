@@ -15,13 +15,19 @@ namespace Electrix.EAI.FluentValidation
         
         public virtual string GetContainFolder()
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Validation\\Rules");
+            //TODO: web service might be error 
+            return AppDomain.CurrentDomain.BaseDirectory;
         }
-       
-        
-        public ElectrixValidationBase()
+
+        public ElectrixValidationBase() : this(null, null) { }
+
+
+        public ElectrixValidationBase(string containFolder, string filename)
         {
-            var setupRules = RuleService.GetSetupRules<T>(GetContainFolder());
+            LoadCommonFile();
+            var setupRules = LoadSetupFile(containFolder, filename);
+            
+
             var errorMessages = setupRules.ErrorMessages;
             foreach (var ruleFor in setupRules.ValidationRules)
             {
@@ -40,6 +46,21 @@ namespace Electrix.EAI.FluentValidation
                         break;
                 }
             }
+        }
+
+        public ValidationRule LoadSetupFile(string containFolder, string filename)
+        {
+            containFolder = containFolder ?? Path.Combine(GetContainFolder(), "Validation\\Rules"); 
+            filename = filename ?? $"{typeof(T).Name}ValidationRules.json";
+
+            return RuleService.GetSetupRules<T>(containFolder, filename);
+        }
+
+        public void LoadCommonFile()
+        {
+            string containFolder = Path.Combine(GetContainFolder(), "Common");
+            string filename = "commonSettings.json";
+            RuleService.GetCommonSettings(containFolder, filename);
         }
     }
 }

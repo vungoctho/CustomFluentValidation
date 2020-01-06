@@ -1,9 +1,17 @@
 {
-  "ErrorMessages": [
-    "{0} length cannot be more than {1} characters",
-    "{0} length cannot be less than {1} characters",
-    "{0} must be provided",
-    "{0} should be in hh:mm:ss format"
+  "ErrorMessages": [    
+    {
+      "Key": "MinimumLengthErrorMessage",
+      "Value": "{0} length cannot be less than {1} characters"
+    },
+    {
+      "Key": "IsRequiredErrorMessage",
+      "Value": "{0} must be provided"
+    },
+    {
+      "Key": "TimePatternErrorMessage",
+      "Value": "{0} should be in hh:mm:ss format"
+    }
   ],
   "ValidationRules": [
     {
@@ -12,18 +20,18 @@
         {
           "Name": "MaximumLength",
           "Value": [ 5 ],
-          "ErrorIndex": 0,
+          "ErrorName": "MaximumLengthErrorMessage",
           "ErrorFormatParams": [ "SystemStatus", 5 ]
         },
         {
           "Name": "MinimumLength",
           "Value": [ 2 ],
-          "ErrorIndex": 1,
+          "ErrorName": "MinimumLengthErrorMessage",
           "ErrorFormatParams": [ "SystemStatus", 2 ]
         },
         {
           "Name": "NotNullOrWhiteSpace",
-          "ErrorIndex": 2,
+          "ErrorName": "IsRequiredErrorMessage",
           "ErrorFormatParams": [ "SystemStatus" ]
         }
       ]
@@ -33,7 +41,7 @@
       "Rules": [
         {
           "Name": "TimePattern",          
-          "ErrorIndex": 3,
+          "ErrorName": "TimePatternErrorMessage",
           "ErrorFormatParams": [ "Scheduled Start Time"]
         }
       ]

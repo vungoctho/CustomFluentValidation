@@ -10,25 +10,29 @@ namespace Electrix.EAI.FluentValidation.FileReader
 {
     public class JsonRuleReader : IValidationRuleReader
     {
-        public ValidationRule LoadValidationRules<T>(string containFolder)
+        public ValidationRule LoadValidationRules<T>(string containFolder, string filename)
         {
-            var filename = $"{typeof(T).Name}ValidationRules.json";
             var fullPath = Path.Combine($"{containFolder}", filename);
+            if(File.Exists(fullPath))
+            {
+                var json = File.ReadAllText(fullPath);
+                return JsonConvert.DeserializeObject<ValidationRule>(json);
+            }
             
-            var json = File.ReadAllText(fullPath);
-
-            var rules = JsonConvert.DeserializeObject<ValidationRule>(json);
-            return rules;
+            return new ValidationRule();
 
         }
 
-        public CommonSettings LoadCommonSettings(string containFolder)
+        public CommonSettings LoadCommonSettings(string containFolder, string filename)
         {
             var fullPath = Path.Combine($"{containFolder}", "commonSettings.json");
-            var json = File.ReadAllText(fullPath);
-
-            var settings = JsonConvert.DeserializeObject<CommonSettings>(json);
-            return settings;
+            if (File.Exists(fullPath))
+            {
+                var json = File.ReadAllText(fullPath);
+                return JsonConvert.DeserializeObject<CommonSettings>(json);
+            }
+            
+            return new CommonSettings();
 
         }
     }

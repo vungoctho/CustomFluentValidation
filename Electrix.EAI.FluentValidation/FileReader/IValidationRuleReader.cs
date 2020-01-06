@@ -8,7 +8,7 @@ namespace Electrix.EAI.FluentValidation.FileReader
 {
     public interface IValidationRuleReader
     {
-        ValidationRule LoadValidationRules<T>(string containFolder);
-        CommonSettings LoadCommonSettings(string containFolder);
+        ValidationRule LoadValidationRules<T>(string containFolder, string filename);
+        CommonSettings LoadCommonSettings(string containFolder, string filename);
     }
 }

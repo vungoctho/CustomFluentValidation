@@ -8,7 +8,7 @@ namespace Electrix.EAI.FluentValidation
 {
     public class ValidationRule 
     {        
-        public List<string> ErrorMessages { get; set; }
+        public List<KeyValue> ErrorMessages { get; set; }
         public List<ValidationRuleFor> ValidationRules { get; set; }
     }
 
@@ -22,7 +22,13 @@ namespace Electrix.EAI.FluentValidation
     {
         public ValidateOperator Name { get; set; }
         public string[] Value { get; set; }
-        public int ErrorIndex { get; set; }
+        public string ErrorName { get; set; }
         public string[] ErrorFormatParams { get; set; }        
+    }
+
+    public class KeyValue
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
     }
 }

@@ -1,5 +1,12 @@
 {
-  "TimePattern": "^(?:(?:([01]?\\d|2[0-3])\\:)?([0-5]?\\d)\\:)?([0-5]?\\d)$",
-  "DatePattern": ""
-
+  "Settings": [
+    {
+      "Key": "MaximumLengthErrorMessage",
+      "Value": "{0} length cannot be more than {1} characters common"
+    },
+    {
+      "Key": "TimePattern",
+      "Value": "^(?:(?:([01]?\\d|2[0-3])\\:)?([0-5]?\\d)\\:)?([0-5]?\\d)$"
+    }
+  ]
 }

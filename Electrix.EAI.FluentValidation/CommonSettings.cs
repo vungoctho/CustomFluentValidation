@@ -1,11 +1,13 @@
 ﻿using Electrix.EAI.FluentValidation.FileReader;
+using System.Collections.Generic;
 
 namespace Electrix.EAI.FluentValidation
 {
     public class CommonSettings
     {
-        public string TimePattern { get; set; }
-        public string DatePattern { get; set; }
+        public static readonly string TimePattern = "TimePattern";
+        public List<KeyValue> Settings { get; set; }
 
+        
     }
 }
