@@ -4,6 +4,7 @@ using FluentValidation;
 using log4net;
 using System;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Electrix.EAI.FluentValidation
@@ -14,8 +15,7 @@ namespace Electrix.EAI.FluentValidation
         private ILog _logger = LogManager.GetLogger(typeof(ElectrixValidationBase<T>));
         
         public virtual string GetContainFolder()
-        {
-            //TODO: web service might be error 
+        {            
             return AppDomain.CurrentDomain.BaseDirectory;
         }
 
@@ -26,20 +26,21 @@ namespace Electrix.EAI.FluentValidation
         {
             LoadCommonFile();
             var setupRules = LoadSetupFile(containFolder, filename);
-            
+            if (setupRules.ValidationRules == null || !setupRules.ValidationRules.Any()) return;
 
             var errorMessages = setupRules.ErrorMessages;
             foreach (var ruleFor in setupRules.ValidationRules)
             {
                 var parameter = Expression.Parameter(typeof(T));
                 var memberExpression = Expression.Property(parameter, typeof(T), ruleFor.PropertyName);
-
-                var propertyType = typeof(T).GetProperty(ruleFor.PropertyName).PropertyType;
-                switch(propertyType.Name.ToLower())
+                var propertyInfo = typeof(T).GetProperty(ruleFor.PropertyName);
+                var propertyType = propertyInfo.PropertyType;
+                switch (Type.GetTypeCode(propertyType))
                 {
-                    case "string":
+                    case TypeCode.String:
                         var func = Expression.Lambda<Func<T, string>>(memberExpression, parameter);
-                        RuleFor(func).SetValidator(new StringValidator(ruleFor.Rules, errorMessages));
+                        RuleFor(func).NotNull().WithMessage(string.Format(RuleService.GetCommonSetting(CommonSettings.IsRequiredErrorMessage), ruleFor.PropertyName))
+                            .SetValidator(new StringValidator(ruleFor.Rules, errorMessages));
                         break;
                     default:
                         _logger?.Error($"Custom Fluent Validation From File - Mising define Property Data Type {propertyType.Name} to build Rule");

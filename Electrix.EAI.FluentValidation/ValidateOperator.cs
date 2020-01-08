@@ -11,7 +11,8 @@ namespace Electrix.EAI.FluentValidation
         MaximumLength,
         MinimumLength,
         NotNullOrWhiteSpace,
-        TimePattern
+        TimePattern,
+        RegularPattern
     }
 
 }

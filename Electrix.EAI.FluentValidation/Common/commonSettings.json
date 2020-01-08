@@ -2,11 +2,23 @@
   "Settings": [
     {
       "Key": "MaximumLengthErrorMessage",
-      "Value": "{0} length cannot be more than {1} characters common"
+      "Value": "{0} length cannot be more than {1} characters"
+    },
+    {
+      "Key": "MinimumLengthErrorMessage",
+      "Value": "{0} length cannot be less than {1} characters"
     },
     {
       "Key": "TimePattern",
-      "Value": "^(?:(?:([01]?\\d|2[0-3])\\:)?([0-5]?\\d)\\:)?([0-5]?\\d)$"
+      "Value": "^(?:[01]\\d|2[0-3]):(?:[0-5]\\d):(?:[0-5]\\d)|(24:00:00)$"
+    },
+    {
+      "Key": "TimePatternErrorMessage",
+      "Value": "{0} should be in hh:mm:ss format"
+    },
+    {
+      "Key": "IsRequiredErrorMessage",
+      "Value": "{0} must be provided"
     }
   ]
 }

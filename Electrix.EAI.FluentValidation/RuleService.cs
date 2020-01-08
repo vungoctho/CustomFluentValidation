@@ -14,16 +14,19 @@ namespace Electrix.EAI.FluentValidation
         private static ILog _logger = LogManager.GetLogger(typeof(RuleService));
 
         // We keep this ValidationRule in Cache to optimize the performance since we don't need to read Rules file muliple times
-        private static ValidationRule _validationRule = null;
+        private static Dictionary<string,ValidationRule>  _validationRules = new Dictionary<string, ValidationRule>();
         public static ValidationRule GetSetupRules<T>(string containFolder, string filename)
         {
-            if (_validationRule == null)
+            var fileLoadedKey = $"{containFolder}{filename}";
+            if (!_validationRules.ContainsKey(fileLoadedKey))
             {
                 IValidationRuleReader reader = new JsonRuleReader();
-                _validationRule = reader.LoadValidationRules<T>(containFolder, filename);
-                _logger?.Info($"Custom Fluent Validation From File - Load Setup Rules file for {typeof(T)}");
+                var rules = reader.LoadValidationRules<T>(containFolder, filename);
+                _validationRules.Add(fileLoadedKey, rules);
+                _logger?.Info($"Custom Fluent Validation From File - Load Setup Rules file for {typeof(T)}. Contain Folder: {containFolder}. Filename: {filename}");
+                return rules;
             }
-            return _validationRule;
+            return _validationRules[fileLoadedKey];
         }
 
 
@@ -32,11 +35,11 @@ namespace Electrix.EAI.FluentValidation
 
         public static CommonSettings GetCommonSettings(string containFolder, string filename)
         {            
-            if (_commonSettings == null)
+            if (_commonSettings == null || _commonSettings.Settings == null || !_commonSettings.Settings.Any())
             {
                 IValidationRuleReader reader = new JsonRuleReader();                
                 _commonSettings = reader.LoadCommonSettings(containFolder, filename);
-                _logger?.Info($"Custom Fluent Validation From File - Load Common setting file");
+                _logger?.Info($"Custom Fluent Validation From File - Load Common setting file. Contain Folder: {containFolder}. Filename: {filename}");
             }
             return _commonSettings;
         }

@@ -12,7 +12,7 @@ namespace CustomFluentValidation
         static void Main(string[] args)
         {
             var wo = new WorkOrderItem();
-            wo.SystemStatus = "";
+            wo.SystemStatus = "  ";
             wo.ScheduledStartTime = "02.13.14";
 
             var wo1 = new WorkOrderItem();

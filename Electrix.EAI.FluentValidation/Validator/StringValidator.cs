@@ -27,6 +27,10 @@ namespace Electrix.EAI.FluentValidation.Validator
                         ruleFor = RuleFor(x => x).Matches(rule.Value?.Length > 0 ? rule.Value[0] : RuleService.GetCommonSetting(CommonSettings.TimePattern))
                             .When(x => !string.IsNullOrWhiteSpace(x));
                         break;
+                    case ValidateOperator.RegularPattern:
+                        ruleFor = RuleFor(x => x).Matches(rule.Value?.Length > 0 ? rule.Value[0] : "")
+                            .When(x => !string.IsNullOrWhiteSpace(x));
+                        break;
                     default:
                         _logger.Error($"String validator - Missing define Validate Operator {rule.Name}");
                         break;
