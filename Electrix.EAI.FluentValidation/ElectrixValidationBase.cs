@@ -39,8 +39,12 @@ namespace Electrix.EAI.FluentValidation
                 {
                     case TypeCode.String:
                         var func = Expression.Lambda<Func<T, string>>(memberExpression, parameter);
-                        RuleFor(func).NotNull().WithMessage(string.Format(RuleService.GetCommonSetting(CommonSettings.IsRequiredErrorMessage), ruleFor.PropertyName))
-                            .SetValidator(new StringValidator(ruleFor.Rules, errorMessages));
+                        var appliedRule = RuleFor(func);
+                        if (ruleFor.IsRequired)
+                        {
+                            appliedRule.NotNull().WithMessage(string.Format(RuleService.GetCommonSetting(CommonSettings.IsRequiredErrorMessage), ruleFor.PropertyName));
+                        }
+                        appliedRule.SetValidator(new StringValidator(ruleFor.Rules, errorMessages));
                         break;
                     default:
                         _logger?.Error($"Custom Fluent Validation From File - Mising define Property Data Type {propertyType.Name} to build Rule");

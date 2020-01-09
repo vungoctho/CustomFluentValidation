@@ -15,6 +15,7 @@ namespace Electrix.EAI.FluentValidation
     public class ValidationRuleFor
     {
         public string PropertyName { get; set; }
+        public bool IsRequired { get; set; } = true;
         public List<Rule> Rules { get; set; }
     }
 
